@@ -1,10 +1,13 @@
 using System;
+using System.IO;
 
 class Program
 {
     static void Main(string[] args)
     {
         Menu journalMenu = new Menu();
+
+        Journal journal = new Journal();
 
         int userSelection;
 
@@ -18,18 +21,16 @@ class Program
             switch (userSelection)
             {
                 case 1:
-                    // Create a new Entry object
-                    // Call create on that object
-                    // Add the entry to the journal
+                    journal.AddEntry();
                     break;
                 case 2:
-                    // Call journal.Display()
+                    journal.Display();
                     break;
                 case 3:
-                    // Save to a file
+                    journal.WriteToFile();
                     break;
                 case 4:
-                    // Read from a file
+                    journal.ReadFromFile();
                     break;
                 case 5:
                     done = true;
