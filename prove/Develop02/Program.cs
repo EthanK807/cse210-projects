@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-
 class Program
 {
     static void Main(string[] args)
@@ -19,6 +18,7 @@ class Program
             userSelection = journalMenu.ProcessMenu();
 
             switch (userSelection)
+            
             {
                 case 1:
                     journal.AddEntry();
