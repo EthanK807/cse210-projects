@@ -9,8 +9,8 @@ class Entry
         this._prompt = _prompt;
         this._response = _response;
     }
-    public void toString()
+    public override string ToString()
     {
-        Console.WriteLine($"{_date}#{_prompt}#{_response}");
+        return $"{_date}#{_prompt}#{_response}";
     }
 }
