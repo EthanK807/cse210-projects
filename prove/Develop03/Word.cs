@@ -21,16 +21,20 @@ class Word
     {
         if (!_visibility)
         {
-            string newString = "";
-            foreach (char c in _text)
+            int textIndex = _text.Length - 1;
+            while (textIndex >= 0 && !char.IsLetterOrDigit(_text[textIndex]))
             {
-                newString += '_';
+                textIndex--;
             }
-            return newString;
+            
+            string wordPart = _text.Substring(0, textIndex + 1);
+            string punctuationPart = _text.Substring(textIndex + 1);
+            
+            return new string('_', wordPart.Length) + punctuationPart + " ";
         }
         else
         {
-            return _text;
+            return _text + " ";
         }
     }
     

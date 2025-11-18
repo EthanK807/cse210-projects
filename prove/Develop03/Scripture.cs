@@ -6,14 +6,13 @@ class Scripture
     {
         _reference = reference;
         _words = new List<Word>();
-        char[] delimiters = new char[] { ' ', ',', '.', '!', '?', ';', ':', '\n', '\r', '\t' };
 
-        List<string> tempList = text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).ToList();
+        List<string> tempList = text.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
 
         foreach (string word in tempList)
         {
             Word word1 = new Word(word);
-            _words.Append(word1);
+            _words.Add(word1);
         }
     }
     public void DisplayScripture()
@@ -21,8 +20,9 @@ class Scripture
         Console.WriteLine($"{_reference.ToString()}\n");
         foreach (Word word in _words)
         {
-            Console.WriteLine(word.GetWordString());
+            Console.Write(word.GetWordString());
         }
+        Console.WriteLine();
     }
     public Reference GetReference()
     {
@@ -35,7 +35,7 @@ class Scripture
     public void HideWords()
     {
         Random rnd = new Random();
-        if (GetHiddenCount() < 3)
+        if (GetHiddenCount() > _words.Count - 3)
         {
             foreach (Word word in _words)
             {
@@ -52,7 +52,7 @@ class Scripture
                 while (true)
                 {
                     int randomWord = rnd.Next(0, _words.Count);
-                    if (!_words[randomWord].GetVisibility())
+                    if (_words[randomWord].GetVisibility())
                     {
                         _words[randomWord].SetVisibility();
                         break;
