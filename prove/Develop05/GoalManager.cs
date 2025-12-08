@@ -1,4 +1,4 @@
-public class GoalManager
+class GoalManager
 {
     private List<Goal> _goals;
     private int _score;
@@ -11,7 +11,7 @@ public class GoalManager
 
     public void Start()
     {
-        bool running = true;
+        Boolean running = True;
         while (running)
         {
             Console.WriteLine("\n--- Eternal Quest Menu ---");

@@ -4,30 +4,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
-        Program.Animation(10);
-    }
-    static void Animation(int duration)
-    {
-        string animationString = "...";
-        int sleepTime = 500;
-        int index = 1000 / sleepTime * duration;
-        DateTime currentTime = DateTime.Now;
-        DateTime endTime = currentTime.AddSeconds(duration);
-
-        
-        while(DateTime.Now < endTime)
+        while (true)
         {
-            Console.Write(animationString.Substring(index-- % animationString.Length));
-            Thread.Sleep(sleepTime);
-            ClearCurrentConsoleLine();
+            Console.Clear();
+            Console.WriteLine("Menu Options:");
+            Console.WriteLine("  1. Start breathing activity");
+            Console.WriteLine("  2. Start reflecting activity");
+            Console.WriteLine("  3. Start listing activity");
+            Console.WriteLine("  4. Quit");
+            Console.Write("Select a choice from the menu: ");
+            
+            int choice = int.Parse(Console.ReadLine());
+
+            switch(choice)
+            {
+                case 1:
+                    BreathingActivity breathing = new BreathingActivity();
+                    breathing.Run();
+                    break;
+                case 2:
+                    ReflectionActivity reflection = new ReflectionActivity();
+                    reflection.Run();
+                    break;
+                case 3:
+                    ListingActivity listing = new ListingActivity();
+                    listing.Run();
+                    break;
+            }
         }
-    }
-    public static void ClearCurrentConsoleLine()
-    {
-        int currentLineCursor = Console.CursorTop;
-        Console.SetCursorPosition(0, currentLineCursor);
-        Console.Write(new string(' ', Console.WindowWidth));
-        Console.SetCursorPosition(0, currentLineCursor);
     }
 }

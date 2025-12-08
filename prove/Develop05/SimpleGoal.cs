@@ -1,4 +1,4 @@
-public class SimpleGoal : Goal
+class SimpleGoal : Goal
     {
         private bool _isComplete;
 
@@ -28,4 +28,3 @@ public class SimpleGoal : Goal
         }
     }
 
-    // A goal that never completes (e.g., Read Scriptures)

@@ -1,4 +1,4 @@
-public class ChecklistGoal : Goal
+class ChecklistGoal : Goal
     {
         private int _amountCompleted;
         private int _target;
@@ -22,7 +22,6 @@ public class ChecklistGoal : Goal
             return _amountCompleted >= _target;
         }
 
-        // We override the display string to show "Completed 2/5"
         public override string GetDetailsString()
         {
             string checkbox = IsComplete() ? "[X]" : "[ ]";
@@ -36,7 +35,6 @@ public class ChecklistGoal : Goal
 
         public int GetBonus() => _bonus;
         
-        // Helper for loading
         public void SetCurrentAmount(int amount)
         {
             _amountCompleted = amount;
