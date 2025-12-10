@@ -27,6 +27,7 @@ class Program
                     manager.CreateGoal();
                     break;
                 case "2":
+                    Console.WriteLine();
                     manager.ListGoalDetails();
                     break;
                 case "3":
@@ -36,7 +37,7 @@ class Program
                     manager.LoadGoals();
                     break;
                 case "5":
-                    RecordEvent();
+                    manager.RecordEvent();
                     break;
                 case "6":
                     running = false;
@@ -47,5 +48,6 @@ class Program
             }
         }
     }
-    }
 }
+
+/* So I added the save and load function which seems to be a part of the above and beyond thing so thats my exceeding requirments */

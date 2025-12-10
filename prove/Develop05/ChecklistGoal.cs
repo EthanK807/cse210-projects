@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 class ChecklistGoal : Goal
     {
         private int _amountCompleted;
@@ -8,6 +10,13 @@ class ChecklistGoal : Goal
             : base(name, description, points)
         {
             _amountCompleted = 0;
+            _target = target;
+            _bonus = bonus;
+        }
+        public ChecklistGoal(string name, string description, string points, int target, int bonus, int amountComplete) 
+            : base(name, description, points)
+        {
+            _amountCompleted = amountComplete;
             _target = target;
             _bonus = bonus;
         }
@@ -30,7 +39,7 @@ class ChecklistGoal : Goal
 
         public override string GetStringRepresentation()
         {
-            return $"ChecklistGoal:{GetName()},{GetDescription()},{GetPoints()},{_bonus},{_target},{_amountCompleted}";
+            return $"ChecklistGoal,{GetName()},{GetDescription()},{GetPoints()},{_bonus},{_target},{_amountCompleted}";
         }
 
         public int GetBonus() => _bonus;

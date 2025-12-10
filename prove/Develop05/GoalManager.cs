@@ -1,3 +1,5 @@
+using System.IO;
+
 class GoalManager
 {
     private List<Goal> _goals;
@@ -7,50 +9,6 @@ class GoalManager
     {
         _goals = new List<Goal>();
         _score = 0;
-    }
-
-    public void Start()
-    {
-        Boolean running = True;
-        while (running)
-        {
-            Console.WriteLine("\n--- Eternal Quest Menu ---");
-            DisplayPlayerInfo();
-            Console.WriteLine("1. Create New Goal");
-            Console.WriteLine("2. List Goals");
-            Console.WriteLine("3. Save Goals");
-            Console.WriteLine("4. Load Goals");
-            Console.WriteLine("5. Record Event");
-            Console.WriteLine("6. Quit");
-            Console.Write("Select a choice from the menu: ");
-
-            string choice = Console.ReadLine();
-
-            switch (choice)
-            {
-                case "1":
-                    CreateGoal();
-                    break;
-                case "2":
-                    ListGoalDetails();
-                    break;
-                case "3":
-                    SaveGoals();
-                    break;
-                case "4":
-                    LoadGoals();
-                    break;
-                case "5":
-                    RecordEvent();
-                    break;
-                case "6":
-                    running = false;
-                    break;
-                default:
-                    Console.WriteLine("Invalid selection.");
-                    break;
-            }
-        }
     }
 
     public void DisplayPlayerInfo()
@@ -145,6 +103,42 @@ class GoalManager
 
             Console.WriteLine($"Congratulations! You have earned {pointsEarned} points!");
             Console.WriteLine($"You now have {_score} points.");
+        }
+    }
+    public void LoadGoals()
+    {
+        string filename = "Goals.txt";
+        string[] lines = System.IO.File.ReadAllLines(filename);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(",");
+            if (parts[0] == "SimpleGoal")
+            {
+                SimpleGoal simplegoal = new SimpleGoal(parts[1], parts[2], parts[3], bool.Parse(parts[4]));
+                _goals.Add(simplegoal);
+            } else if (parts[0] == "EternalGoal")
+            {
+                EternalGoal eternalGoal = new EternalGoal(parts[1], parts[2], parts[3]);
+                _goals.Add(eternalGoal);
+            } else if (parts[0] == "ChecklistGoal")
+            {
+                ChecklistGoal checklistgoal = new ChecklistGoal(parts[1], parts[2], parts[3], int.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6]));
+                _goals.Add(checklistgoal);
+            }
+        }
+    }
+    public void SaveGoals()
+    {
+        string filename = "Goals.txt";     
+        Console.WriteLine($"Writing to: {Path.GetFullPath(filename)}");
+
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            foreach (Goal goal in _goals)
+            {
+                outputFile.WriteLine(goal.GetStringRepresentation());     
+            }
         }
     }
 }
